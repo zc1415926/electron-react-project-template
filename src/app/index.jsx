@@ -2,12 +2,12 @@
  * Created by zc1415926 on 2017/5/15.
  */
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 
-let App = React.createClass({
+class App extends React.Component{
     render() {
-        return(<h1>Hello, world!</h1>);
+        return(<h1>Hello, world!!</h1>);
     }
-});
+}
 
-ReactDOM.render(<App/>, document.getElementById('content'));
+render(<App/>, document.getElementById('content'));
