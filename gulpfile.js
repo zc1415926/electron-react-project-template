@@ -80,3 +80,8 @@ gulp.task('watchWithConnect', function(){
 // gulp.watch cann't watch new files,
 // using Ctrl + R for reload manually.
 gulp.task('default', ['copy-files', 'build-react', 'watchWithConnect']);
+
+var release = require('./build.windows');
+gulp.task('release', function () {
+    return release.build();
+});
