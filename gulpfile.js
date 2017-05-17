@@ -1,13 +1,14 @@
 /**
  * Created by zc1415926 on 2017/5/15.
  */
-var gulp = require('gulp');
-var gulpWebpack = require('gulp-webpack');
-var gulpUtil = require('gulp-util');
-var webpack = require('webpack');
-var electronConnect = require('electron-connect').server.create({path:'./build', logLevel: 0});
+let gulp = require('gulp');
+let gulpWebpack = require('gulp-webpack');
+let gulpUtil = require('gulp-util');
+let useref = require('gulp-useref');
+let webpack = require('webpack');
+let electronConnect = require('electron-connect').server.create({path:'./build', logLevel: 0});
 
-var config = {
+let config = {
     path: {
         htmlSrcPath: 'src/app/index.html',
         htmlDestDir: 'build/app/',
@@ -19,9 +20,13 @@ var config = {
 gulp.task('copy-files', function(){
     gulp.src('package.json')
         .pipe(gulp.dest('build'));
+
     gulp.src('src/main.js')
+        .pipe(useref())
         .pipe(gulp.dest('build'));
+
     gulp.src('src/app/index.html')
+        .pipe(useref())
         .pipe(gulp.dest('build/app'));
 });
 
@@ -85,3 +90,5 @@ var release = require('./build.windows');
 gulp.task('release', function () {
     return release.build();
 });
+
+gulp.task('build', ['copy-files', 'build-react']);
